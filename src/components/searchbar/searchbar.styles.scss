@@ -15,15 +15,15 @@
         &:focus {
             border-color: blue;
 
-            + .result-items-container {
-                display: block;
-            }
+            // + .result-items-container {
+            //     display: block;
+            // }
         }
     }
 
     .result-items-container {
         margin-top: 5px;
-        background: #e6e6e6;
+        background: #fbfbfb;
         position: absolute;
         max-height: 200px;
         overflow-y: scroll;
@@ -32,6 +32,11 @@
 
         .item {
             padding: 5px;
+            cursor: pointer;
+
+            &:hover {
+                background: #fff;
+            }
         }
     }
 }
