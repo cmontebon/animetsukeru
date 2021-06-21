@@ -3,8 +3,8 @@
 Search and view anime's information. Built using Create React App, Apollo, GraphQL, and [AniList API](https://anilist.gitbook.io). 
 
 ## Demo
-https://animetsureku.herokuapp.com/
-https://animetsureku.herokuapp.com/anime/113415
+- https://animetsureku.herokuapp.com/
+- https://animetsureku.herokuapp.com/anime/113415
 
 ## Features
 - Search anime
