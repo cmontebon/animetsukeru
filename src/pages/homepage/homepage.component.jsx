@@ -7,18 +7,20 @@ import './homepage.styles.scss';
 const Homepage = () => {
     return (
         <div className="homepage">
-            <h1>Animetsureku</h1>
+            <h1>
+                <strong>ANIME</strong>TSUREKU
+            </h1>
 
             <div className="searchbar">
                 <Searchbar />
             </div>
 
-            <div className="sub-urls">
+            {/* <div className="sub-urls">
                 <span>Browse</span>
                 <span>Schedules</span>
                 <span>Trending</span>
                 <span>Genre</span>
-            </div>
+            </div> */}
         </div>
     )
     

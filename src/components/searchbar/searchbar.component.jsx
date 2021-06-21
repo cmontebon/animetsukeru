@@ -18,7 +18,7 @@ const Searchbar = () => {
         const searchTerm = setTimeout(() => {
           if (!search) return;
           refetch({query: search})
-        }, 1500);
+        }, 500);
 
         return () => clearTimeout(searchTerm);
     }, [search])
@@ -29,7 +29,7 @@ const Searchbar = () => {
 
     return (
         <div className="searchbar">
-            <input className="search-input" type="text" placeholder="search here..." onChange={ (e) => setSearch(e.target.value) } />
+            <input className="search-input" type="text" placeholder="e.g. attack on titan, boku no hero, jujutsu kaisen " onChange={ (e) => setSearch(e.target.value) } />
             <div className="result-items-container" style={{ display: search ? 'block' : 'none' }}>
                 { isLoading ? 
                     <div>Loading...</div>
