@@ -1,9 +1,9 @@
 
-.searchbar-container {
+.searchbar {
     width: 100%;
     position: relative;
 
-    .searchbar {
+    .search-input {
         width: 100%;
         font-size: 22px;
         padding: 20px;
@@ -28,7 +28,7 @@
         max-height: 200px;
         overflow-y: scroll;
         display: none;
-        width: 100%;
+        width: inherit;
 
         .item {
             padding: 5px;
