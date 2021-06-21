@@ -161,3 +161,42 @@ export const GET_SERIES_PAGE_BY_ID = gql
       }
     }
   }`
+
+
+export const SEARCH_QUERY = gql`
+query ($query: String, $type: MediaType) {
+  Page {
+    media(search: $query, type: $type) {
+      id
+      title {
+        romaji
+        english
+        native
+      }
+      coverImage {
+        medium
+        large
+        color
+      }
+      bannerImage
+      format
+      type
+      averageScore
+      popularity
+      episodes
+      season
+      hashtag
+      isAdult
+      startDate {
+        year
+        month
+        day
+      }
+      endDate {
+        year
+        month
+        day
+      }
+    }
+  }
+}`;

@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import { useQuery, gql } from "@apollo/client";
+import React from 'react';
+import { useQuery } from "@apollo/client";
 
 import Navbar from '../../components/navbar/navbar.component';
 import CharactersList from '../../components/characters-list/characters-list.component';
-
-import { SeriesPageData } from '../../fixtures/series-id-page.data';
 
 import { GET_SERIES_PAGE_BY_ID } from '../../graphql/queries'; 
 
@@ -20,9 +17,6 @@ const AnimeDetails = ({ match }) => {
     });
 
     if (loading) return <span>Loading...</span>;
-
-    console.log(data)
-
 
     return (
         <>

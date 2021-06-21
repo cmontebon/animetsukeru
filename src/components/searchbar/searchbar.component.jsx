@@ -1,47 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
-import {useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useHistory } from 'react-router-dom';
 
-import './searchbar.styles.scss';
+import { SEARCH_QUERY } from '../../graphql/queries';
 
-const SEARCH_QUERY = gql`
-query ($query: String, $type: MediaType) {
-  Page {
-    media(search: $query, type: $type) {
-      id
-      title {
-        romaji
-        english
-        native
-      }
-      coverImage {
-        medium
-        large
-        color
-      }
-      bannerImage
-      format
-      type
-      averageScore
-      popularity
-      episodes
-      season
-      hashtag
-      isAdult
-      startDate {
-        year
-        month
-        day
-      }
-      endDate {
-        year
-        month
-        day
-      }
-    }
-  }
-}`;
+import './searchbar.styles.scss';
 
 const Searchbar = () => {
     const history = useHistory();
