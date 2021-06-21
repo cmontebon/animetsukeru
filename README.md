@@ -1,6 +1,6 @@
 # Animetsureku (HOV Initial Test)
 
-Search and view anime's information. Built using Create React App, Apollo, GraphQL, and used [AniList API](https://anilist.gitbook.io). 
+Search and view anime's information. Built using Create React App, Apollo, GraphQL, and [AniList API](https://anilist.gitbook.io). 
 
 ## Features
 - Search anime
