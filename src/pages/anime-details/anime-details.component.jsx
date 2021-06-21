@@ -1,35 +1,57 @@
 import React from 'react';
+import moment from 'moment';
 
 import Navbar from '../../components/navbar/navbar.component';
+import CharactersList from '../../components/characters-list/characters-list.component';
+
+import { SeriesPageData } from '../../fixtures/series-id-page.data';
 
 import './anime-details.styles.scss';
 
 const AnimeDetails = ({ match }) => {
-    
+    console.log(SeriesPageData);
+
+    const { data : { Media } } = SeriesPageData;
+    const { 
+        coverImage, 
+        bannerImage, 
+        description, 
+        characters, 
+        title, 
+        genres,
+        episodes,
+        season,
+        source,
+        status,
+        synonyms
+     } = Media;
 
     return (
         <>
             <Navbar />
 
             <div className="anime-details">
-                <div className="banner" style={{ backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/media/anime/banner/103900-I3gUCm5xlsyX.jpg")'}} />
+                <div className="banner" style={{ backgroundImage: `url("${bannerImage}")`}} />
             
                 <div className="content">
                     <div className="general">
-                        <div className="display-photo" style={{ backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/media/anime/banner/103900-I3gUCm5xlsyX.jpg")'}}></div>
+                        <div className="display-photo" style={{ backgroundImage: `url("${coverImage.large}")`}}></div>
 
                         <div className="details">
-                            <h1 className="title">Kobayashi-san Chi no Maid Dragon S</h1>
+                            <h1 className="title">{ title.english }</h1>
 
                             <div className="alternative-titles">
-                                小林さんちのメイドラゴンS, Miss Kobayashi's Dragon Maid
+                                { Object.keys(title).map(k => {
+                                    if (k != 'english') {
+                                        return title[k] + ', ';
+                                    }
+                                })}
                             </div>
 
                             <div className="genres">
-                                <span>ecchi</span>
-                                <span>romance</span>
-                                <span>thriller</span>
-                                <span>mystery</span>
+                                { genres.map((item, idx) => {
+                                    return <span key={idx}>{item}</span>
+                                })}
                             </div> 
 
                             <div></div>
@@ -39,146 +61,41 @@ const AnimeDetails = ({ match }) => {
                     <div className="more-information">
                         {/* sidebar */}
                         <div className="sidebar">
-                            <h5>Information</h5>
                             <div>
-                                <span className="label">Episodes: </span>Unknown
+                                <h5>Information</h5>
+                                <div>
+                                    <span className="label">Episodes: </span>{episodes}
+                                </div>
+                                <div>
+                                    <span className="label">Status: </span>{status}
+                                </div>
+                                <div>
+                                    <span className="label">Season: </span>{season}
+                                </div>
+                                <div>
+                                    <span className="label">Source: </span>{source}
+                                </div>
                             </div>
-                            <div>
-                                <span className="label">Status: </span>Not aired yet
-                            </div>
-                            <div>
-                                <span className="label">Aired: </span>Jul 8, 2021 to ?
-                            </div>
-                            <div>
-                                <span className="label">Studios: </span>Kyoto Animation
+
+                            <div style={{padding: '5px 0'}}>
+                                <h5>Synonyms</h5>
+                                <span>{synonyms.join(', ')}</span>
                             </div>
                         </div>
+                        
                         {/* main content */}
                         <div className="main">
                             <div>
                                 <h3>Description</h3>
-                                <p>Several hundred years ago, humans were nearly exterminated by titans. Titans are typically several stories tall, seem to have no intelligence, devour human beings and, worst of all, seem to do it for the pleasure rather than as a food source. A small percentage of humanity survived by walling themselves in a city protected by extremely high walls, even taller than the biggest of titans. nFlash forward to the present and the city has not seen a titan in over 100 years. Teenage boy Eren and his foster sister Mikasa witness something horrific as the city walls are destroyed by a colossal titan that appears out of thin air. As the smaller titans flood the city, the two kids watch in horror as their mother is eaten alive. Eren vows that he will murder every single titan and take revenge for all of mankind.</p>
+                                <p dangerouslySetInnerHTML={{__html: description}} />
                             </div>
+                            
                             <div>
-                                <h3>Characters and Voice Actors</h3>
-                                <div className="characters-list">
-                                    <div 
-                                        className="item"
-                                        style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/character/medium/b40881-F3gr1PkreDvj.png")'}}
-                                    >
-
-                                        <div className="voice-actor"> 
-                                            <div 
-                                                className="avatar"
-                                                style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/staff/medium/n100295-d7CPqlz4jGaT.png")'}}
-                                            />
-                                            <div className="details">
-                                                <div>Minatozaki Sana</div>
-                                                <div>as Mikasa Ackerman</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div 
-                                        className="item"
-                                        style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/character/medium/b40881-F3gr1PkreDvj.png")'}}
-                                    >
-
-                                        <div className="voice-actor"> 
-                                            <div 
-                                                className="avatar"
-                                                style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/staff/medium/n100295-d7CPqlz4jGaT.png")'}}
-                                            />
-                                            <div className="details">
-                                                <div>Minatozaki Sana</div>
-                                                <div>as Mikasa Ackerman</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div 
-                                        className="item"
-                                        style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/character/medium/b40881-F3gr1PkreDvj.png")'}}
-                                    >
-
-                                        <div className="voice-actor"> 
-                                            <div 
-                                                className="avatar"
-                                                style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/staff/medium/n100295-d7CPqlz4jGaT.png")'}}
-                                            />
-                                            <div className="details">
-                                                <div>Minatozaki Sana</div>
-                                                <div>as Mikasa Ackerman</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div 
-                                        className="item"
-                                        style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/character/medium/b40881-F3gr1PkreDvj.png")'}}
-                                    >
-
-                                        <div className="voice-actor"> 
-                                            <div 
-                                                className="avatar"
-                                                style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/staff/medium/n100295-d7CPqlz4jGaT.png")'}}
-                                            />
-                                            <div className="details">
-                                                <div>Minatozaki Sana</div>
-                                                <div>as Mikasa Ackerman</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div 
-                                        className="item"
-                                        style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/character/medium/b40881-F3gr1PkreDvj.png")'}}
-                                    >
-
-                                        <div className="voice-actor"> 
-                                            <div 
-                                                className="avatar"
-                                                style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/staff/medium/n100295-d7CPqlz4jGaT.png")'}}
-                                            />
-                                            <div className="details">
-                                                <div>Minatozaki Sana</div>
-                                                <div>as Mikasa Ackerman</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div 
-                                        className="item"
-                                        style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/character/medium/b40881-F3gr1PkreDvj.png")'}}
-                                    >
-
-                                        <div className="voice-actor"> 
-                                            <div 
-                                                className="avatar"
-                                                style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/staff/medium/n100295-d7CPqlz4jGaT.png")'}}
-                                            />
-                                            <div className="details">
-                                                <div>Minatozaki Sana</div>
-                                                <div>as Mikasa Ackerman</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div 
-                                        className="item"
-                                        style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/character/medium/b40881-F3gr1PkreDvj.png")'}}
-                                    >
-
-                                        <div className="voice-actor"> 
-                                            <div 
-                                                className="avatar"
-                                                style={{backgroundImage: 'url("https://s4.anilist.co/file/anilistcdn/staff/medium/n100295-d7CPqlz4jGaT.png")'}}
-                                            />
-                                            <div className="details">
-                                                <div>Minatozaki Sana</div>
-                                                <div>as Mikasa Ackerman</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h3 style={{padding: '20px 0'}}>Characters & Voice Actors</h3>
+                                <CharactersList data={characters.edges}/>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             
