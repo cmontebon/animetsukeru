@@ -35,14 +35,18 @@ const Searchbar = () => {
                     <div>Loading...</div>
                  :
                     data && 
-                    data.Page.media.map((item) => (
-                        <div key={item.id} className="item" onClick={() => history.push(`/anime/${item.id}`)}>
-                            {/* <img src={item.coverImage.medium} alt="" /> */}
-                            <span>
-                                { item.title.english || item.romaji }
-                            </span>
-                        </div>
-                    ))
+                    data.Page.media.map((item) => {
+                        if (!item.title.english) return;
+
+                        return (
+                            <div key={item.id} className="item" onClick={() => history.push(`/anime/${item.id}`)}>
+                                {/* <img src={item.coverImage.medium} alt="" /> */}
+                                <span>
+                                    { item.title.english || item.romaji }
+                                </span>
+                            </div>
+                        )
+                    })
                 }
             </div>
         </div>
