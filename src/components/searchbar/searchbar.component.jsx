@@ -53,7 +53,7 @@ const Searchbar = () => {
 
     useEffect(() => {
         const searchTerm = setTimeout(() => {
-          console.log('tae');
+          if (!search) return;
           refetch({query: search})
         }, 1500);
 

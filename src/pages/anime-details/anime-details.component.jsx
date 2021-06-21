@@ -1,55 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import { useQuery, gql } from "@apollo/client";
 
 import Navbar from '../../components/navbar/navbar.component';
 import CharactersList from '../../components/characters-list/characters-list.component';
 
 import { SeriesPageData } from '../../fixtures/series-id-page.data';
 
+import { GET_SERIES_PAGE_BY_ID } from '../../graphql/queries'; 
+
 import './anime-details.styles.scss';
 
 const AnimeDetails = ({ match }) => {
-    console.log(SeriesPageData);
+    const { loading, error, data } = useQuery(GET_SERIES_PAGE_BY_ID, {
+        variables: {
+            id: match.params.id,
+            type: 'ANIME'
+        }
+    });
 
-    const { data : { Media } } = SeriesPageData;
-    const { 
-        coverImage, 
-        bannerImage, 
-        description, 
-        characters, 
-        title, 
-        genres,
-        episodes,
-        season,
-        source,
-        status,
-        synonyms
-     } = Media;
+    if (loading) return <span>Loading...</span>;
+
+    console.log(data)
+
 
     return (
         <>
             <Navbar />
 
             <div className="anime-details">
-                <div className="banner" style={{ backgroundImage: `url("${bannerImage}")`}} />
+                <div className="banner" style={{ backgroundImage: `url("${data.Media.bannerImage}")`}} />
             
                 <div className="content">
                     <div className="general">
-                        <div className="display-photo" style={{ backgroundImage: `url("${coverImage.large}")`}}></div>
+                        <div className="display-photo" style={{ backgroundImage: `url("${data.Media.coverImage.large}")`}}></div>
 
                         <div className="details">
-                            <h1 className="title">{ title.english }</h1>
+                            <h1 className="title">{ data.Media.title.english }</h1>
 
                             <div className="alternative-titles">
-                                { Object.keys(title).map(k => {
+                                { Object.keys(data.Media.title).map(k => {
                                     if (k != 'english') {
-                                        return title[k] + ', ';
+                                        return data.Media.title[k] + ', ';
                                     }
                                 })}
                             </div>
 
                             <div className="genres">
-                                { genres.map((item, idx) => {
+                                { data.Media.genres.map((item, idx) => {
                                     return <span key={idx}>{item}</span>
                                 })}
                             </div> 
@@ -64,22 +62,22 @@ const AnimeDetails = ({ match }) => {
                             <div>
                                 <h5>Information</h5>
                                 <div>
-                                    <span className="label">Episodes: </span>{episodes}
+                                    <span className="label">Episodes: </span>{data.Media.episodes}
                                 </div>
                                 <div>
-                                    <span className="label">Status: </span>{status}
+                                    <span className="label">Status: </span>{data.Media.status}
                                 </div>
                                 <div>
-                                    <span className="label">Season: </span>{season}
+                                    <span className="label">Season: </span>{data.Media.season}
                                 </div>
                                 <div>
-                                    <span className="label">Source: </span>{source}
+                                    <span className="label">Source: </span>{data.Media.source}
                                 </div>
                             </div>
 
                             <div style={{padding: '5px 0'}}>
                                 <h5>Synonyms</h5>
-                                <span>{synonyms.join(', ')}</span>
+                                <span>{data.Media.synonyms.join(', ')}</span>
                             </div>
                         </div>
                         
@@ -87,12 +85,13 @@ const AnimeDetails = ({ match }) => {
                         <div className="main">
                             <div>
                                 <h3>Description</h3>
-                                <p dangerouslySetInnerHTML={{__html: description}} />
+                                <p dangerouslySetInnerHTML={{__html: data.Media.description}} />
                             </div>
                             
                             <div>
                                 <h3 style={{padding: '20px 0'}}>Characters & Voice Actors</h3>
-                                <CharactersList data={characters.edges}/>
+                                
+                                <CharactersList data={data.Media.characters.edges}/>
                             </div>
                         </div>
                     </div>
