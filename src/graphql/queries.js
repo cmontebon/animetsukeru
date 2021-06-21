@@ -10,16 +10,6 @@ export const GET_SERIES_PAGE_BY_ID = gql
         native
         userPreferred
       }
-      startDate {
-        year
-        month
-        day
-      }
-      endDate {
-        year
-        month
-        day
-      }
       coverImage {
         large
         medium
@@ -75,90 +65,6 @@ export const GET_SERIES_PAGE_BY_ID = gql
           }
         }
       }
-      staff (perPage: 10) {
-        edges {
-          role
-          node {
-            id
-            name {
-              first
-              last
-              native
-            }
-            image {
-              medium
-              large
-            }
-          }
-        }
-      }
-      relations {
-        edges {
-          relationType
-          node {
-            id
-            title {
-              romaji
-              english
-              native
-              # ...
-            }
-          }
-        }
-      }
-      trailer {
-        id
-        site
-      }
-      tags {
-        id
-        name
-        description
-        category
-        rank
-        isGeneralSpoiler
-        isMediaSpoiler
-        isAdult
-      }
-      reviews (perPage: 2) {
-        nodes {
-          id
-          userId
-          summary
-          rating
-          ratingAmount
-        }
-      }
-      externalLinks {
-        id
-        url
-        site
-      }
-      rankings {
-        id
-        rank
-        type
-        format
-        year
-        season
-        allTime
-        context
-      }
-      stats {
-        airingProgression {
-          episode
-          score
-          watching
-        }
-        statusDistribution {
-          status
-          amount
-        }
-        scoreDistribution {
-          score
-          amount
-        }
-      }
     }
   }`
 
@@ -172,30 +78,6 @@ query ($query: String, $type: MediaType) {
         romaji
         english
         native
-      }
-      coverImage {
-        medium
-        large
-        color
-      }
-      bannerImage
-      format
-      type
-      averageScore
-      popularity
-      episodes
-      season
-      hashtag
-      isAdult
-      startDate {
-        year
-        month
-        day
-      }
-      endDate {
-        year
-        month
-        day
       }
     }
   }
