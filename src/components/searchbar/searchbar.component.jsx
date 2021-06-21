@@ -52,9 +52,12 @@ const Searchbar = () => {
     });
 
     useEffect(() => {
-        setTimeout(() => {
-            refetch({query: search})
-        }, 3000)
+        const searchTerm = setTimeout(() => {
+          console.log('tae');
+          refetch({query: search})
+        }, 1500);
+
+        return () => clearTimeout(searchTerm);
     }, [search])
 
     useEffect(() => {
@@ -62,8 +65,8 @@ const Searchbar = () => {
     }, [loading])
 
     return (
-        <div className="searchbar-container">
-            <input className="searchbar" type="text" placeholder="search here..." onChange={ (e) => setSearch(e.target.value) } />
+        <div className="searchbar">
+            <input className="search-input" type="text" placeholder="search here..." onChange={ (e) => setSearch(e.target.value) } />
             <div className="result-items-container" style={{ display: search ? 'block' : 'none' }}>
                 { isLoading ? 
                     <div>Loading...</div>
